@@ -20,9 +20,9 @@ const server = http.createServer(function (req, res) {
       res.end(data);
     });
   } else if (req.method === "GET" && petRegExp.test(req.url)) {
-    //console.log(petRegExp.test(req.url));
     let found = req.url.match(petRegExp);
-    //console.log(found);
+    console.log("found");
+    console.log(found);
     fs.readFile(petsPath, "utf8", (error, data) => {
       if (error) {
         console.error(error.stack);
@@ -32,16 +32,15 @@ const server = http.createServer(function (req, res) {
       }
       let pets = JSON.parse(data);
       let petsJSON = JSON.stringify(pets[parseInt(found[1])]);
-      //console.log("JSON");
-      //console.log(petsJSON);
+
       if (petsJSON === undefined) {
-        res.setHeader("Content-Type", "text/plain");
+        res.writeHead(404, { "Content-Type": "text/plain" });
+        //res.setHeader("Content-Type", "text/plain");
         res.end("Not Found");
       } else {
         res.setHeader("Content-Type", "application/json");
         console.log("res header");
         console.log(res.getHeader("Content-Length"));
-
         res.end(petsJSON);
       }
     });
