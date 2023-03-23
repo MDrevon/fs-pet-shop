@@ -1,6 +1,7 @@
 const fs = require("fs");
 
 let option = process.argv[2];
+//console.log(process.argv[0]);
 
 switch (option) {
   case "read":
