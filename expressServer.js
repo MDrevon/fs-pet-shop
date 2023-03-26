@@ -8,12 +8,7 @@ const port = process.env.PORT || 3000;
 const path = require("path");
 const petsPath = path.join(__dirname, "pets.json");
 
-// app.get("/", (req, res) => {
-//   console.log(petsPath);
-// });
-
 app.get("/pets", (req, res) => {
-  //app.JSON()
   fs.readFile(petsPath, "utf8", (error, data) => {
     if (error) {
       console.error(error.stack);
@@ -76,6 +71,19 @@ app.post("/pets/age=:age/kind=:kind/name=:name", (req, res) => {
       });
     }
   });
+});
+
+app.get("/*", (req, res, next) => {
+  next({ status: 404, message: "Not Found" });
+});
+
+app.get("/boom", (req, res, next) => {
+  next({ status: 500, message: "Internal Server Error" });
+});
+
+app.use((err, req, res, next) => {
+  console.log("ts");
+  res.status(err.status).json({ error: err });
 });
 
 app.listen(port);
