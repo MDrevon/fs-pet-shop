@@ -1,0 +1,55 @@
+### Test
+GET http://localhost:3000/
+
+### Get All Pets
+GET http://localhost:3000/pets
+
+### Get Single Pets
+GET http://localhost:3000/pets/1
+
+### Get Single Pet Bad ID
+GET http://localhost:3000/pets/99
+
+### Post Pet
+POST http://localhost:3000/pets?age=1&kind=turtle&name=Raphael
+
+### Post Pet JSON
+POST http://localhost:3000/pets
+Content-Type: application/json
+
+{
+    "petname": "Rap",
+    "age": 1,
+    "kind": "turtle"
+}
+
+### Put Pet JSON
+PUT http://localhost:3000/pets/1
+Content-Type: application/json
+
+{
+    "petname": "Splinter",
+    "age": 10,
+    "kind": "Rat"
+}
+
+### Patch Pet JSON
+PATCH http://localhost:3000/pets/1
+Content-Type: application/json
+
+{
+    "age": 9
+}
+
+
+### Post Pet Bad Request
+POST http://localhost:3000/pets?kind=turtle&name=Rap
+
+### Delete Pet
+DELETE http://localhost:3000/pets/9
+
+### Boom
+GET http://localhost:3000/boom
+
+### Invalid URL
+GET http://localhost:3000/badurl
